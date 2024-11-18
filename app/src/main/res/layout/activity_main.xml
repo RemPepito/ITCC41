@@ -1,0 +1,261 @@
+<!-- activity_main.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android/apk/res-auto"
+    xmlns:tools="http://schemas.android/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginBottom="16dp">
+
+
+                <ImageView
+                    android:id="@+id/scrollImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/imagebackground" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#80000000" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="20dp">
+
+
+                    <TextView
+                        android:id="@+id/brandName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="INFIMEDIA"
+                        android:textColor="@color/yellow"
+                        android:textSize="50sp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/headerSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:layout_marginTop="10dp"
+                        android:text="Free downloadable\nmedia assets\nfor your needs!"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
+
+
+                    <!-- Modified Search bar -->
+                    <EditText
+                        android:id="@+id/searchMainBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Search..."
+                        android:background="@android:drawable/edit_text"
+                        android:padding="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:inputType="text"
+                        android:imeOptions="actionSearch"
+                        android:textColor="@color/black" />
+
+
+                    <TextView
+                        android:id="@+id/headerSlogan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Discover more media types below!"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </FrameLayout>
+
+
+            <!-- Tabs -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center">
+
+
+                <!-- Photos Tab -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+
+                    <TextView
+                        android:id="@+id/photosTab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Photos"
+                        android:textSize="18sp"
+                        android:padding="8dp"
+                        android:textColor="@color/yellow"
+                        android:textStyle="bold"
+                        android:gravity="center" />
+
+
+                    <View
+                        android:id="@+id/photosUnderline"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/yellow"
+                        android:visibility="visible" /> <!-- Initially visible -->
+                </LinearLayout>
+
+
+                <!-- Illustrations Tab -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+
+                    <TextView
+                        android:id="@+id/illustrationsTab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="Art"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+
+                    <View
+                        android:id="@+id/illustrationsUnderline"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/yellow"
+                        android:visibility="gone" /> <!-- Initially hidden -->
+                </LinearLayout>
+
+
+                <!-- Videos Tab -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+
+                    <TextView
+                        android:id="@+id/videosTab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Videos"
+                        android:textSize="18sp"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:gravity="center" />
+
+
+                    <View
+                        android:id="@+id/videosUnderline"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/yellow"
+                        android:visibility="gone" /> <!-- Initially hidden -->
+                </LinearLayout>
+
+
+                <!-- GIFs Tab -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+
+                    <TextView
+                        android:id="@+id/gifsTab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GIFs"
+                        android:textSize="18sp"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:gravity="center" />
+
+
+                    <View
+                        android:id="@+id/gifsUnderline"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/yellow"
+                        android:visibility="gone" /> <!-- Initially hidden -->
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- Optional long content -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/frameContainer">
+
+
+                <TextView
+                    android:id="@+id/results_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/searchResult"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/scrolltext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/scrolltext"
+                    android:textColor="@color/black" />
+
+
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
