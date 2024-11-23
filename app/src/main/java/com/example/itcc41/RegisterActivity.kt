@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONArray
+import org.json.JSONObject
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -19,7 +21,7 @@ class RegisterActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
         val confirmPasswordEditText = findViewById<EditText>(R.id.confirmPasswordEditText)
         val registerButton = findViewById<Button>(R.id.registerButton)
-        val toggleTextView = findViewById<TextView>(R.id.toggleTextView) // New reference to the TextView
+        val toggleTextView = findViewById<TextView>(R.id.toggleTextView)
 
         registerButton.setOnClickListener {
             val name = nameEditText.text.toString().trim()
@@ -55,8 +57,37 @@ class RegisterActivity : AppCompatActivity() {
     private fun saveUserData(name: String, password: String) {
         val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString("username", name)
-        editor.putString("password", password)
-        editor.apply()
+
+        // Retrieve existing user data
+        val userData = sharedPreferences.getString("user_data", null)
+        val userArray = if (userData != null) {
+            JSONArray(userData)
+        } else {
+            JSONArray()
+        }
+
+        // Check if the username already exists
+        var userExists = false
+        for (i in 0 until userArray.length()) {
+            val userObject = userArray.getJSONObject(i)
+            if (userObject.getString("username") == name) {
+                userExists = true
+                break
+            }
+        }
+
+        if (userExists) {
+            Toast.makeText(this, "Username already exists. Please choose a different one.", Toast.LENGTH_SHORT).show()
+        } else {
+            // Add new user to the array
+            val newUser = JSONObject()
+            newUser.put("username", name)
+            newUser.put("password", password)
+            userArray.put(newUser)
+
+            // Save the updated array back to SharedPreferences
+            editor.putString("user_data", userArray.toString())
+            editor.apply()
+        }
     }
 }

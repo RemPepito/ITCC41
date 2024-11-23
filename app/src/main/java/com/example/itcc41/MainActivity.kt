@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONArray
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,10 +44,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun validateCredentials(username: String, password: String): Boolean {
         val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val registeredUsername = sharedPreferences.getString("username", null)
-        val registeredPassword = sharedPreferences.getString("password", null)
+        val userData = sharedPreferences.getString("user_data", null)
 
-        // Check if the entered username and password match the saved credentials
-        return username == registeredUsername && password == registeredPassword
+        if (userData != null) {
+            val userArray = JSONArray(userData)
+
+            // Iterate through the JSON array to find a matching username and password
+            for (i in 0 until userArray.length()) {
+                val userObject = userArray.getJSONObject(i)
+                val storedUsername = userObject.getString("username")
+                val storedPassword = userObject.getString("password")
+
+                if (username == storedUsername && password == storedPassword) {
+                    return true // Valid credentials
+                }
+            }
+        }
+
+        return false // Invalid credentials
     }
 }
