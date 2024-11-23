@@ -10,6 +10,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class PageActivity : AppCompatActivity() {
     private lateinit var photosTab: TextView
@@ -28,6 +30,25 @@ class PageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val database = Database(this)
+
+        // Fetch data from the database
+        val dataList = mutableListOf<DataModel>()
+        val cursor = database.readableDatabase.rawQuery("SELECT uploader, image FROM imaginary", null)
+        if (cursor.moveToFirst()) {
+            do {
+                val uploader = cursor.getString(cursor.getColumnIndexOrThrow("uploader")) // Fetch uploader name
+                val image = cursor.getBlob(cursor.getColumnIndexOrThrow("image")) // Fetch image as BLOB
+                dataList.add(DataModel(uploader, image)) // Add both to the list
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+
+        // Set up RecyclerView
+        val recyclerView = findViewById<RecyclerView>(R.id.frameContainer)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = RecyclerViewAdapter(this, dataList)
 
         // Initialize views
         photosTab = findViewById(R.id.photosTab)

@@ -240,13 +240,17 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/frameContainer">
+                android:id="@+id/frame">
 
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/frameContainer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="30px"/>
+                    android:layout_margin="16dp"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical" />
+
 
 
             </FrameLayout>

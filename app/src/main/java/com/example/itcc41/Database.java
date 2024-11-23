@@ -25,6 +25,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String DOWNLOADS = "downloads";
     private static final String COMMENTS = "comments";
     private static final String SEARCH = "search";
+    private static final String CATEGORY = "category";
     private static final String IMAGE = "image";
 
     public Database(@Nullable Context context) {
@@ -39,6 +40,7 @@ public class Database extends SQLiteOpenHelper {
                         " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         AUTHOR + " TEXT, " +
                         SEARCH + " TEXT, " +
+                        CATEGORY + " TEXT, " +
                         LIKES + " INTEGER, " +
                         DOWNLOADS + " INTEGER, " +
                         COMMENTS + " INTEGER, " +
@@ -53,11 +55,12 @@ public class Database extends SQLiteOpenHelper {
     }
 
     // Method to insert a record with an image
-    public void addRecord(String author, String search, int likes, int downloads, int comments, Bitmap image) {
+    public void addRecord(String author, String search, String category, int likes, int downloads, int comments, Bitmap image) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(AUTHOR, author);
         values.put(SEARCH, search);
+        values.put(CATEGORY, category);
         values.put(LIKES, likes);
         values.put(DOWNLOADS, downloads);
         values.put(COMMENTS, comments);
@@ -69,7 +72,7 @@ public class Database extends SQLiteOpenHelper {
     // Method to convert Bitmap to byte array
     private byte[] imageToByteArray(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream); // Compress image as PNG
+        bitmap.compress(Bitmap.CompressFormat.PNG, 10, stream); // Compress image as PNG
         return stream.toByteArray();
     }
 
