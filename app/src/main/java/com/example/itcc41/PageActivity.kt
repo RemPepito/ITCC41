@@ -26,29 +26,14 @@ class PageActivity : AppCompatActivity() {
     private lateinit var searchBar: EditText
     private lateinit var headerSlogan: TextView
 
+    private var tabnumber = 1
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val database = Database(this)
-
-        // Fetch data from the database
-        val dataList = mutableListOf<DataModel>()
-        val cursor = database.readableDatabase.rawQuery("SELECT uploader, image FROM imaginary", null)
-        if (cursor.moveToFirst()) {
-            do {
-                val uploader = cursor.getString(cursor.getColumnIndexOrThrow("uploader")) // Fetch uploader name
-                val image = cursor.getBlob(cursor.getColumnIndexOrThrow("image")) // Fetch image as BLOB
-                dataList.add(DataModel(uploader, image)) // Add both to the list
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-
-        // Set up RecyclerView
-        val recyclerView = findViewById<RecyclerView>(R.id.frameContainer)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = RecyclerViewAdapter(this, dataList)
 
         // Initialize views
         photosTab = findViewById(R.id.photosTab)
@@ -81,22 +66,59 @@ class PageActivity : AppCompatActivity() {
             selectedUnderline.visibility = View.VISIBLE // Show underline
         }
 
+        fun performSearch(category: String, searchText: String) {
+            val query: String
+            val params: Array<String>
+
+            if (searchText.isNotEmpty()) {
+                query = "SELECT uploader, image FROM imaginary WHERE category = ? AND search LIKE ?"
+                params = arrayOf(category, "%$searchText%")
+            } else {
+                query = "SELECT uploader, image FROM imaginary WHERE category = ?"
+                params = arrayOf(category)
+                headerSlogan.text = "Explore More Below"
+            }
+
+            val cursor = database.readableDatabase.rawQuery(query, params)
+            val dataList = mutableListOf<DataModel>()
+
+            if (cursor.moveToFirst()) {
+                do {
+                    val uploader = cursor.getString(cursor.getColumnIndexOrThrow("uploader"))
+                    val image = cursor.getBlob(cursor.getColumnIndexOrThrow("image"))
+                    dataList.add(DataModel(uploader, image))
+                } while (cursor.moveToNext())
+            }
+            cursor.close()
+
+            // Assuming frameContainer is actually a RecyclerView
+            val recyclerView = findViewById<RecyclerView>(R.id.frameContainer)
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.adapter = RecyclerViewAdapter(this, dataList)
+        }
+
         photosTab.setOnClickListener {
+            tabnumber = 1
             resetTabs()
             highlightTab(photosTab, photosUnderline)
+            performSearch("photo", searchBar.text.toString().trim())
         }
 
         illustrationsTab.setOnClickListener {
+            tabnumber = 2
             resetTabs()
             highlightTab(illustrationsTab, illustrationsUnderline)
+            performSearch("illustration", searchBar.text.toString().trim())
         }
 
         videosTab.setOnClickListener {
+            tabnumber = 3
             resetTabs()
             highlightTab(videosTab, videosUnderline)
         }
 
         gifsTab.setOnClickListener {
+            tabnumber = 4
             resetTabs()
             highlightTab(gifsTab, gifsUnderline)
         }
@@ -108,6 +130,10 @@ class PageActivity : AppCompatActivity() {
                 val searchText = searchBar.text.toString().trim()
                 if (searchText.isNotEmpty()) {
                     headerSlogan.text = "Results for \"$searchText\""
+                }
+                when (tabnumber) {
+                    1 -> performSearch("photo", searchText)
+                    2 -> performSearch("illustration", searchText)
                 }
                 true // Indicates the event was handled
             } else {

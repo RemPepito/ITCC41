@@ -18,7 +18,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "imaginary.db";
     private static final int DATABASE_VERSION = 1;
 
-    private static final String TABLE_NAME = "imaginary";
+    public static final String TABLE_NAME = "imaginary";
     private static final String COLUMN_ID = "_id";
     private static final String AUTHOR = "uploader";
     private static final String LIKES = "likes";
