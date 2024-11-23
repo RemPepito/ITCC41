@@ -24,7 +24,8 @@ public class Database extends SQLiteOpenHelper {
     private static final String LIKES = "likes";
     private static final String DOWNLOADS = "downloads";
     private static final String COMMENTS = "comments";
-    private static final String IMAGE = "image"; // New column for storing image as BLOB
+    private static final String SEARCH = "search";
+    private static final String IMAGE = "image";
 
     public Database(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -37,6 +38,7 @@ public class Database extends SQLiteOpenHelper {
                 "CREATE TABLE " + TABLE_NAME +
                         " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         AUTHOR + " TEXT, " +
+                        SEARCH + " TEXT, " +
                         LIKES + " INTEGER, " +
                         DOWNLOADS + " INTEGER, " +
                         COMMENTS + " INTEGER, " +
@@ -51,10 +53,11 @@ public class Database extends SQLiteOpenHelper {
     }
 
     // Method to insert a record with an image
-    public void addRecord(String author, int likes, int downloads, int comments, Bitmap image) {
+    public void addRecord(String author, String search, int likes, int downloads, int comments, Bitmap image) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(AUTHOR, author);
+        values.put(SEARCH, search);
         values.put(LIKES, likes);
         values.put(DOWNLOADS, downloads);
         values.put(COMMENTS, comments);
