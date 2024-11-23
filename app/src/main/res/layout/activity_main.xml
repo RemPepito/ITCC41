@@ -226,7 +226,15 @@
                         android:visibility="gone" /> <!-- Initially hidden -->
                 </LinearLayout>
             </LinearLayout>
-
+            <TextView
+                android:id="@+id/results_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/searchResult"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <!-- Optional long content -->
             <FrameLayout
@@ -235,21 +243,10 @@
                 android:id="@+id/frameContainer">
 
 
-                <TextView
-                    android:id="@+id/results_text"
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="@string/searchResult"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/scrolltext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/scrolltext"
-                    android:textColor="@color/black" />
+                    android:layout_height="match_parent"
+                    android:layout_margin="30px"/>
 
 
             </FrameLayout>
