@@ -46,8 +46,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:gravity="center_horizontal"
+                    android:orientation="vertical"
                     android:padding="20dp">
 
 
@@ -66,8 +66,8 @@
                         android:id="@+id/headerSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="left"
                         android:layout_marginTop="10dp"
+                        android:gravity="left"
                         android:text="Free downloadable\nmedia assets\nfor your needs!"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
@@ -78,13 +78,13 @@
                         android:id="@+id/searchMainBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Search..."
-                        android:background="@android:drawable/edit_text"
-                        android:padding="10dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="10dp"
-                        android:inputType="text"
+                        android:background="@android:drawable/edit_text"
+                        android:hint="Search..."
                         android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:padding="10dp"
                         android:textColor="@color/black" />
 
 
@@ -92,8 +92,8 @@
                         android:id="@+id/headerSlogan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginTop="10dp"
+                        android:gravity="center"
                         android:text="Discover more media types below!"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
@@ -105,9 +105,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="16dp"
-                android:gravity="center">
+                android:padding="16dp">
 
 
                 <!-- Photos Tab -->
@@ -115,20 +115,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
 
                     <TextView
                         android:id="@+id/photosTab"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Photos"
-                        android:textSize="18sp"
+                        android:gravity="center"
                         android:padding="8dp"
+                        android:text="Photos"
                         android:textColor="@color/yellow"
-                        android:textStyle="bold"
-                        android:gravity="center" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
 
                     <View
@@ -145,8 +145,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
 
                     <TextView
@@ -169,53 +169,24 @@
                 </LinearLayout>
 
 
-                <!-- Videos Tab -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
-
-
-                    <TextView
-                        android:id="@+id/videosTab"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Videos"
-                        android:textSize="18sp"
-                        android:padding="8dp"
-                        android:textColor="@color/black"
-                        android:gravity="center" />
-
-
-                    <View
-                        android:id="@+id/videosUnderline"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@color/yellow"
-                        android:visibility="gone" /> <!-- Initially hidden -->
-                </LinearLayout>
-
-
                 <!-- GIFs Tab -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
 
                     <TextView
                         android:id="@+id/gifsTab"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GIFs"
-                        android:textSize="18sp"
+                        android:gravity="center"
                         android:padding="8dp"
+                        android:text="GIFs"
                         android:textColor="@color/black"
-                        android:gravity="center" />
+                        android:textSize="18sp" />
 
 
                     <View
@@ -226,6 +197,7 @@
                         android:visibility="gone" /> <!-- Initially hidden -->
                 </LinearLayout>
             </LinearLayout>
+
             <TextView
                 android:id="@+id/results_text"
                 android:layout_width="match_parent"

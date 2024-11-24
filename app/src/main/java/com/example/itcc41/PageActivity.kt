@@ -16,12 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 class PageActivity : AppCompatActivity() {
     private lateinit var photosTab: TextView
     private lateinit var illustrationsTab: TextView
-    private lateinit var videosTab: TextView
     private lateinit var gifsTab: TextView
 
     private lateinit var photosUnderline: View
     private lateinit var illustrationsUnderline: View
-    private lateinit var videosUnderline: View
     private lateinit var gifsUnderline: View
     private lateinit var searchBar: EditText
     private lateinit var headerSlogan: TextView
@@ -38,19 +36,17 @@ class PageActivity : AppCompatActivity() {
         // Initialize views
         photosTab = findViewById(R.id.photosTab)
         illustrationsTab = findViewById(R.id.illustrationsTab)
-        videosTab = findViewById(R.id.videosTab)
         gifsTab = findViewById(R.id.gifsTab)
 
         photosUnderline = findViewById(R.id.photosUnderline)
         illustrationsUnderline = findViewById(R.id.illustrationsUnderline)
-        videosUnderline = findViewById(R.id.videosUnderline)
         gifsUnderline = findViewById(R.id.gifsUnderline)
         searchBar = findViewById(R.id.searchMainBar)
         headerSlogan = findViewById(R.id.results_text)
 
         fun resetTabs() {
-            val tabs = listOf(photosTab, illustrationsTab, videosTab, gifsTab)
-            val underlines = listOf(photosUnderline, illustrationsUnderline, videosUnderline, gifsUnderline)
+            val tabs = listOf(photosTab, illustrationsTab, gifsTab)
+            val underlines = listOf(photosUnderline, illustrationsUnderline, gifsUnderline)
             for (tab in tabs) {
                 tab.setTextColor(ContextCompat.getColor(this, R.color.black)) // Reset text color to black
                 tab.setTypeface(null, Typeface.NORMAL) // Reset to normal text style
@@ -111,14 +107,9 @@ class PageActivity : AppCompatActivity() {
             performSearch("illustration", searchBar.text.toString().trim())
         }
 
-        videosTab.setOnClickListener {
-            tabnumber = 3
-            resetTabs()
-            highlightTab(videosTab, videosUnderline)
-        }
 
         gifsTab.setOnClickListener {
-            tabnumber = 4
+            tabnumber = 3
             resetTabs()
             highlightTab(gifsTab, gifsUnderline)
         }

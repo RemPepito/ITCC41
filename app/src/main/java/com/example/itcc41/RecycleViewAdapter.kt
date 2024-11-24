@@ -26,6 +26,7 @@ class RecyclerViewAdapter(
         return ViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataList[position]
         // Set uploader name dynamically
