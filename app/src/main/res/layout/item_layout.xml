@@ -22,13 +22,14 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
-        <!-- Uploader's Image -->
+        <!-- Uploader's Image/GIF -->
         <ImageView
             android:id="@+id/uploaderImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:contentDescription="@string/image_placeholder" />
+            android:contentDescription="@string/image_placeholder"
+            android:adjustViewBounds="true" />
 
         <!-- Download Button -->
         <Button

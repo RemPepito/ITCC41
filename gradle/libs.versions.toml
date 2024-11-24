@@ -25,6 +25,10 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version = "4.15.1" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version = "4.15.1" }
+glide-okhttp3 = { group = "com.github.bumptech.glide", name = "okhttp3-integration", version = "4.15.1" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
