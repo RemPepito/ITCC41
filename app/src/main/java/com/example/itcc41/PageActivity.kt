@@ -99,11 +99,11 @@ class PageActivity : AppCompatActivity() {
             val params: Array<String>
 
             if (searchText.isNotEmpty()) {
-                query = "SELECT id, uploader, gif FROM gifs WHERE search LIKE ?" // Use 'id' instead of '_id'
+                query = "SELECT id, uploader, gif FROM gifs WHERE search LIKE ?"
                 params = arrayOf("%$searchText%")
                 headerSlogan.text = "Results for \"$searchText\""
             } else {
-                query = "SELECT id, uploader, gif FROM gifs" // Use 'id' instead of '_id'
+                query = "SELECT id, uploader, gif FROM gifs"
                 params = arrayOf()
                 headerSlogan.text = "Explore More Below"
             }

@@ -123,6 +123,80 @@ public class Database extends SQLiteOpenHelper {
         return null; // If not found in either table
     }
 
+    public void incrementViewsById(int id, String table) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = null;
+        try {
+            if ("imaginary".equalsIgnoreCase(table)) {
+                cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+                if (cursor != null && cursor.moveToFirst()) {
+                    int currentViews = cursor.getInt(cursor.getColumnIndexOrThrow(LIKES)); // Assuming LIKES is used as views
+                    ContentValues values = new ContentValues();
+                    values.put(LIKES, currentViews + 1);
+                    db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+                    Log.d("Database", "Views incremented for imaginary table, ID: " + id);
+                } else {
+                    Log.d("Database", "ID not found in imaginary table.");
+                }
+            } else if ("gifs".equalsIgnoreCase(table)) {
+                cursor = db.rawQuery("SELECT * FROM " + GIF_TABLE_NAME + " WHERE " + GIF_COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+                if (cursor != null && cursor.moveToFirst()) {
+                    int currentViews = cursor.getInt(cursor.getColumnIndexOrThrow(GIF_LIKES)); // Assuming GIF_LIKES is used as views
+                    ContentValues values = new ContentValues();
+                    values.put(GIF_LIKES, currentViews + 1);
+                    db.update(GIF_TABLE_NAME, values, GIF_COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+                    Log.d("Database", "Views incremented for gifs table, ID: " + id);
+                } else {
+                    Log.d("Database", "ID not found in gifs table.");
+                }
+            } else {
+                Log.d("Database", "Invalid table name provided: " + table);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+    public void incrementDownloadsById(int id, String table) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = null;
+        try {
+            if ("imaginary".equalsIgnoreCase(table)) {
+                cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+                if (cursor != null && cursor.moveToFirst()) {
+                    int currentDownloads = cursor.getInt(cursor.getColumnIndexOrThrow(DOWNLOADS));
+                    ContentValues values = new ContentValues();
+                    values.put(DOWNLOADS, currentDownloads + 1);
+                    db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+                    Log.d("Database", "Downloads incremented for imaginary table, ID: " + id);
+                } else {
+                    Log.d("Database", "ID not found in imaginary table.");
+                }
+            } else if ("gifs".equalsIgnoreCase(table)) {
+                cursor = db.rawQuery("SELECT * FROM " + GIF_TABLE_NAME + " WHERE " + GIF_COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+                if (cursor != null && cursor.moveToFirst()) {
+                    int currentDownloads = cursor.getInt(cursor.getColumnIndexOrThrow(GIF_DOWNLOADS));
+                    ContentValues values = new ContentValues();
+                    values.put(GIF_DOWNLOADS, currentDownloads + 1);
+                    db.update(GIF_TABLE_NAME, values, GIF_COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+                    Log.d("Database", "Downloads incremented for gifs table, ID: " + id);
+                } else {
+                    Log.d("Database", "ID not found in gifs table.");
+                }
+            } else {
+                Log.d("Database", "Invalid table name provided: " + table);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+
+
     // DataModel class
     public class DataModel {
         private int id;

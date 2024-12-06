@@ -35,6 +35,7 @@ class DetailActivity : AppCompatActivity() {
             val selectedImage = findViewById<ImageView>(R.id.selected_image)
 
             if (dataModel.category == "gif") {
+                database.incrementViewsById(dataModel.id, "gifs")
                 // Load GIF using Glide
                 Glide.with(this)
                     .asGif()
@@ -42,6 +43,7 @@ class DetailActivity : AppCompatActivity() {
                     .into(selectedImage)
             } else {
                 // Load image as a Bitmap
+                database.incrementViewsById(dataModel.id, "imaginary")
                 val bitmap = BitmapFactory.decodeByteArray(dataModel.data, 0, dataModel.data.size)
                 selectedImage.setImageBitmap(bitmap)
             }
@@ -59,6 +61,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun saveToGallery(dataModel: Database.DataModel) {
+        val database = Database(this)
         // Get the Downloads directory
         val downloadsFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 
@@ -70,8 +73,10 @@ class DetailActivity : AppCompatActivity() {
         try {
             FileOutputStream(file).use { fos ->
                 if (dataModel.category == "gif") {
+                    database.incrementDownloadsById(dataModel.id, "gifs")
                     fos.write(dataModel.data) // Save GIF data directly
                 } else {
+                    database.incrementDownloadsById(dataModel.id, "imaginary")
                     val bitmap = BitmapFactory.decodeByteArray(dataModel.data, 0, dataModel.data.size)
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos) // Compress and save image
                 }

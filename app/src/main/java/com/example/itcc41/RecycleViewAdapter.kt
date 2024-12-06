@@ -53,7 +53,6 @@ class RecyclerViewAdapter(
             )
         }
 
-        // Add logging for item details
         holder.uploaderImage.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailActivity::class.java).apply {
@@ -66,7 +65,6 @@ class RecyclerViewAdapter(
                 putExtra("COMMENTS", item.comments)
                 putExtra("IMAGE", item.image) // Pass the image byte array
             }
-            context.startActivity(intent)
         }
 
 
